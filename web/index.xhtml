@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="grwlErrores"/>
+            <p:panel header="Panel Nuevo Nodo">
+                <p:outputLabel value="Dato:"/>
+                <p:inputText required="true" value="#{arbolBinarioControlador.dato}"/>
+                <p:commandButton value="Agregar" action="#{arbolBinarioControlador.adicionarNodo()}"
+                                 update="@all" />
+                <p:commandButton value="InOrden" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" />
+            </p:panel> 
+            <h:panelGroup rendered="#{arbolBinarioControlador.verInOrden}">
+                <p:panel header="InOrden">
+                    <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.inOrden()}">
+                        <p:column headerText="Id">
+                            <h:outputText value="#{nodo}" />
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:panel>
+            </h:panelGroup>
+        </h:form>
+    </h:body>
+</html>
+
