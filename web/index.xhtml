@@ -7,8 +7,20 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+        <style type="text/css">
+            .ui-diagram-element {
+                border:0.1em dotted #d4e06b;    
+                width:14em; 
+                height:4em;     
+                line-height:4em;
+                text-align: center;
+            }
+        </style>
         <h:form>
             <p:growl id="grwlErrores"/>
+            <p:diagram value="#{arbolBinarioControlador.model}" style="height:400px" styleClass="ui-widget-content" />
+
+
             <p:panel header="Panel Nuevo Nodo">
                 <p:outputLabel value="Dato:"/>
                 <p:inputText required="true" value="#{arbolBinarioControlador.dato}"/>
