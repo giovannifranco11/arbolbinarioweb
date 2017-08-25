@@ -6,15 +6,20 @@
 package arbolbinarioweb.controlador;
 
 import arbolbinario.modelo.ArbolBinario;
+import arbolbinario.modelo.Nodo;
 import arbolbinario.modelo.excepciones.ArbolBinarioException;
 import arbolbinarioweb.controlador.util.JsfUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.primefaces.model.diagram.Connection;
 import org.primefaces.model.diagram.DefaultDiagramModel;
 import org.primefaces.model.diagram.Element;
+import org.primefaces.model.diagram.connector.Connector;
+import org.primefaces.model.diagram.connector.StraightConnector;
 import org.primefaces.model.diagram.endpoint.DotEndPoint;
 import org.primefaces.model.diagram.endpoint.EndPointAnchor;
 
@@ -105,16 +110,44 @@ public class ArbolBinarioControlador implements Serializable {
     
     public void pintarArbol()
     {
+        
         model = new DefaultDiagramModel();
         model.setMaxConnections(-1);
-         
-        Element elementA = new Element(arbol.getRaiz().getDato(), "20em", "6em");
-        elementA.addEndPoint(new DotEndPoint(EndPointAnchor.BOTTOM));
-        
-        model.addElement(elementA);
+        model.setConnectionsDetachable(false);
+        StraightConnector connector = new StraightConnector();
+        connector.setPaintStyle("{strokeStyle:'#404a4e', lineWidth:2}");
+        connector.setHoverPaintStyle("{strokeStyle:'#20282b'}");
+        model.setDefaultConnector(connector);
+        pintarArbol(arbol.getRaiz(), model, null, 30, 0);
         
     }
     
+    
+    
+
+    private void pintarArbol(Nodo reco,DefaultDiagramModel model, Element padre, int x, int y) {
+               
+        if (reco != null) {
+            Element elementHijo = new Element(reco.getDato());
+            
+            elementHijo.setX(String.valueOf(x)+"em");
+            elementHijo.setY(String.valueOf(y)+"em");
+            
+            if(padre!=null)
+            {
+                elementHijo.addEndPoint(new DotEndPoint(EndPointAnchor.TOP));
+                DotEndPoint conectorPadre=new DotEndPoint(EndPointAnchor.BOTTOM);
+                padre.addEndPoint(conectorPadre);                
+                model.connect(new Connection(conectorPadre, elementHijo.getEndPoints().get(0)));        
+                
+            }    
+            
+            model.addElement(elementHijo);
+            
+            pintarArbol(reco.getIzquierda(),model, elementHijo,x-5,y+5);
+            pintarArbol(reco.getDerecha(),model,elementHijo,x+5, y+5);
+        }
+    }
     
     
     
