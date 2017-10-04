@@ -30,13 +30,13 @@ import org.primefaces.model.diagram.endpoint.EndPointAnchor;
 public class AVLControlador implements Serializable {
 
     private DefaultDiagramModel model;
-    private DefaultDiagramModel modelArbol2;
+    
 
     private ArbolBinarioAVL arbol = new ArbolBinarioAVL();
     private int dato;
     private boolean verInOrden = false;
 
-    private String datoscsv = "18,15,13,17,8,14,-8,10,59,28,80,78,90";
+    private String datoscsv = "18,15,13,17,8,14";//,-8,10,59,28,80,78,90";
     private int terminado;
     private ArbolBinarioAVL arbolTerminados = new ArbolBinarioAVL();
 
@@ -56,14 +56,7 @@ public class AVLControlador implements Serializable {
         this.terminado = terminado;
     }
 
-    public DefaultDiagramModel getModelArbol2() {
-        return modelArbol2;
-    }
-
-    public void setModelArbol2(DefaultDiagramModel modelArbol2) {
-        this.modelArbol2 = modelArbol2;
-    }
-
+    
     public String getDatoscsv() {
         return datoscsv;
     }
@@ -148,11 +141,11 @@ public class AVLControlador implements Serializable {
     private void pintarArbol(NodoAVL reco, DefaultDiagramModel model, Element padre, int x, int y) {
 
         if (reco != null) {
-            Element elementHijo = new Element(reco.getDato());
+            Element elementHijo = new Element(reco);
 
             elementHijo.setX(String.valueOf(x) + "em");
             elementHijo.setY(String.valueOf(y) + "em");
-
+            elementHijo.setStyleClass("ui-diagram-element-busc");
             if (padre != null) {
                 elementHijo.addEndPoint(new DotEndPoint(EndPointAnchor.TOP));
                 DotEndPoint conectorPadre = new DotEndPoint(EndPointAnchor.BOTTOM);
@@ -179,80 +172,6 @@ public class AVLControlador implements Serializable {
         }
     }
 
-    public void buscarTerminadosEn() {
-        for (Element ele : model.getElements()) {
-            ele.setStyleClass("ui-diagram-element");
-            int numTerm = Integer.parseInt(ele.getData().toString());
-            if (numTerm < 0) {
-                numTerm *= -1;
-            }
-            if (numTerm % 10 == terminado) {
-                ele.setStyleClass("ui-diagram-element-busc");
-            }
-        }
-    }
-
-    public void encontrarTerminadosEn() {
-        try {
-            arbolTerminados = new ArbolBinarioAVL();
-            encontrarTerminadosEn(arbol.getRaiz());
-            pintarArbolTerminados();
-        } catch (ArbolBinarioException ex) {
-            JsfUtil.addErrorMessage("Ocurrio un error generando el árbol de terminados" + ex);
-        }
-    }
-
-    private void encontrarTerminadosEn(NodoAVL reco) throws ArbolBinarioException {
-        if (reco != null) {
-            int numTerm= reco.getDato();
-            if(numTerm<0)
-            {
-                numTerm *=-1;
-            }
-            if(numTerm%10==terminado)
-            {
-                arbolTerminados.adicionarNodo(reco.getDato(), arbolTerminados.getRaiz());
-            }
-            encontrarTerminadosEn(reco.getIzquierda());
-            encontrarTerminadosEn(reco.getDerecha());
-        }
-    }
-
-    public void pintarArbolTerminados() {
-
-        modelArbol2 = new DefaultDiagramModel();
-        modelArbol2.setMaxConnections(-1);
-        modelArbol2.setConnectionsDetachable(false);
-        StraightConnector connector = new StraightConnector();
-        connector.setPaintStyle("{strokeStyle:'#404a4e', lineWidth:2}");
-        connector.setHoverPaintStyle("{strokeStyle:'#20282b'}");
-        modelArbol2.setDefaultConnector(connector);
-        pintarArbolTerminados(arbolTerminados.getRaiz(), modelArbol2, null, 30, 0);
-
-    }
-
-    private void pintarArbolTerminados(NodoAVL reco, DefaultDiagramModel model, Element padre, int x, int y) {
-
-        if (reco != null) {
-            Element elementHijo = new Element(reco.getDato());
-
-            elementHijo.setX(String.valueOf(x) + "em");
-            elementHijo.setY(String.valueOf(y) + "em");
-
-            if (padre != null) {
-                elementHijo.addEndPoint(new DotEndPoint(EndPointAnchor.TOP));
-                DotEndPoint conectorPadre = new DotEndPoint(EndPointAnchor.BOTTOM);
-                padre.addEndPoint(conectorPadre);
-                model.connect(new Connection(conectorPadre, elementHijo.getEndPoints().get(0)));
-
-            }
-
-            model.addElement(elementHijo);
-
-            pintarArbolTerminados(reco.getIzquierda(), model, elementHijo, x - 5, y + 5);
-            pintarArbolTerminados(reco.getDerecha(), model, elementHijo, x + 5, y + 5);
-        }
-    }
-
+    
 }
 
