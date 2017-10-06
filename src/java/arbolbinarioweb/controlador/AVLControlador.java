@@ -173,5 +173,11 @@ public class AVLControlador implements Serializable {
     }
 
     
+    public void balancear(){
+        arbol.balancear(arbol.getRaiz());
+        pintarArbol();
+        
+    }
+    
 }
 

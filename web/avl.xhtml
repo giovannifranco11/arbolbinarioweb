@@ -13,6 +13,10 @@
         <p:diagram id="pnlArbol" value="#{avlControlador.model}" style="height:400px" styleClass="ui-widget-content" />
 
         <h:form>
+        <p:commandButton value="Balancear" action="#{avlControlador.balancear()}"
+                                 update="@all" ajax="false"/>
+        </h:form>
+        <h:form>
             <p:panel header="Llenar árbol">
                 <p:inputTextarea required="true" cols="40" value="#{avlControlador.datoscsv}"/>
                 <p:commandButton value="LLenar Arbol" action="#{avlControlador.extraerDatos()}"
