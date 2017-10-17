@@ -10,12 +10,13 @@
     <ui:define name="content">   
 
         <p:growl id="grwlErrores"/>
-        <p:diagram id="pnlArbol" value="#{avlControlador.model}" style="height:400px" styleClass="ui-widget-content" />
+        <p:diagram id="pnlArbol" value="#{avlControlador.model}" style="height:250px" styleClass="ui-widget-content" />
 
         <h:form>
         <p:commandButton value="Balancear" action="#{avlControlador.balancear()}"
                                  update="@all" ajax="false"/>
         </h:form>
+        <p:panelGrid columns="2">
         <h:form>
             <p:panel header="Llenar árbol">
                 <p:inputTextarea required="true" cols="40" value="#{avlControlador.datoscsv}"/>
@@ -37,6 +38,7 @@
 
             </p:panel>
         </h:form>
+            </p:panelGrid>
         <h:panelGroup rendered="#{avlControlador.verInOrden}">
             <p:panel header="InOrden">
                 <p:dataTable var="nodo" value="#{avlControlador.arbol.inOrden()}">

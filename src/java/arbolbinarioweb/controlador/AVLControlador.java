@@ -5,8 +5,6 @@
  */
 package arbolbinarioweb.controlador;
 
-import arbolbinario.modelo.ArbolBinario;
-import arbolbinario.modelo.Nodo;
 import arbolbinario.modelo.excepciones.ArbolBinarioException;
 import arbolbinarioweb.controlador.util.JsfUtil;
 import avl.modelo.ArbolBinarioAVL;
@@ -36,7 +34,7 @@ public class AVLControlador implements Serializable {
     private int dato;
     private boolean verInOrden = false;
 
-    private String datoscsv = "18,15,13,17,8,14";//,-8,10,59,28,80,78,90";
+    private String datoscsv = "5,6,7";//,-8,10,59,28,80,78,90";
     private int terminado;
     private ArbolBinarioAVL arbolTerminados = new ArbolBinarioAVL();
 
