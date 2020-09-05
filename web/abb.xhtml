@@ -7,6 +7,23 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:define name="head">
         
+        <style type="text/css">
+    .ui-diagram-element {  
+        width:8em; 
+        height:3em;     
+        line-height:3em;
+        text-align: center;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+        border-radius: 4px;
+        border: 1px solid #3333FF;
+        background-color: #70CF76;
+        color: #0728F3;
+    }
+    .ui-diagram-element:hover{
+        background-color: yellow;
+    }
+    </style>
+        
     </ui:define>
     <ui:define name="content">       
 
@@ -21,7 +38,7 @@
                 <p:commandButton value="InOrden" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>                
                 <p:commandButton value="PreOrden" action="#{arbolBinarioControlador.habilitarPreOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="PostOrden" action="#{arbolBinarioControlador.habilitarPostOrden()}" update="@all" ajax="false"/>
-                <p:commandButton value="PorNiveles" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
+                <p:commandButton value="PorNiveles" action="#{arbolBinarioControlador.impNIveles()}" update="@all" ajax="false"/>
                 <p:commandButton value="NivelOrdenado" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="Hojas" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="Buscar" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
@@ -74,32 +91,27 @@
             </p:panel>
         </h:panelGroup>
         
+        <h:panelGroup rendered="#{arbolBinarioControlador.verPreorden}">        
+            <p:panel header="PreOrden">
+                <p:dataTable var="dato" value="#{arbolBinarioControlador.arbol.preOrden()}">
+                    <p:column headerText="Numero">
+                        <h:outputText value="#{dato}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:panelGroup> 
+        
         <h:panelGroup rendered="#{arbolBinarioControlador.verPostOrden}">
             <p:panel header="PostOrden">
                 <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.postOrden()}">
                     <p:column headerText="Número">
                         <h:outputText value="#{nodo}" />
                     </p:column>
-                </p:dataTable>
-                
-            </p:panel>
-        
-            
+                </p:dataTable>                
+            </p:panel>    
         </h:panelGroup>
-        
-        
-        
-        
-        
-        <p:panel header="PreOrden">
-            <p:dataTable var="dato" value="#{arbolBinarioControlador.arbol.preOrden()}">
-                    <p:column headerText="Numero">
-                        <h:outputText value="#{dato}" />
-                    </p:column>
-
-                </p:dataTable>
-        </p:panel>
-                 
+                            
+             
  
         <p:diagram id="pnlArbolTerminados" value="#{arbolBinarioControlador.modelArbol2}" style="height:400px" styleClass="ui-widget-content" />
         

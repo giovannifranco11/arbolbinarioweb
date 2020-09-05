@@ -30,6 +30,8 @@ import org.primefaces.model.diagram.endpoint.EndPointAnchor;
 @Named(value = "arbolBinarioControlador")
 @SessionScoped
 public class ArbolBinarioControlador implements Serializable {
+    
+    Arbol miArbol = new Arbol();
 
     private DefaultDiagramModel model;
     private DefaultDiagramModel modelArbol2;
@@ -75,15 +77,26 @@ public class ArbolBinarioControlador implements Serializable {
     public void setDatoscsv(String datoscsv) {
         this.datoscsv = datoscsv;
     }
-
+    
+// InOrden
     public boolean isVerInOrden() {
         return verInOrden;
     }
-
+    
     public void setVerInOrden(boolean verInOrden) {
         this.verInOrden = verInOrden;
     }
     
+ // PreOrden 
+    public boolean isVerPreorden(){
+            return verPreOrden;
+    }
+    
+    public void setVerPreOrden(boolean verPreOrden){
+        this.verPreOrden = verPreOrden;
+    }
+ 
+ // PostOrden
     public boolean isVerPostOrden() {
         return verPostOrden;
     }
@@ -155,6 +168,11 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
+   /* public String imprimirPorNiveles(){
+        ArrayList it = this.miArbol.impNiveles();
+        return (recorrido(it, "Imprimir por niveles"));
+    }
+    */
     
     public DefaultDiagramModel getModel() {
         return model;
@@ -170,8 +188,8 @@ public class ArbolBinarioControlador implements Serializable {
         model.setMaxConnections(-1);
         model.setConnectionsDetachable(false);
         StraightConnector connector = new StraightConnector();
-        connector.setPaintStyle("{strokeStyle:'#404a4e', lineWidth:2}");
-        connector.setHoverPaintStyle("{strokeStyle:'#20282b'}");
+        connector.setPaintStyle("{strokeStyle:'red', lineWidth:2}");
+        connector.setHoverPaintStyle("{strokeStyle:'green'}");
         model.setDefaultConnector(connector);
         pintarArbol(arbol.getRaiz(), model, null, 30, 0);
 
@@ -180,7 +198,7 @@ public class ArbolBinarioControlador implements Serializable {
     private void pintarArbol(Nodo reco, DefaultDiagramModel model, Element padre, int x, int y) {
 
         if (reco != null) {
-            Element elementHijo = new Element(reco.getDato());
+            Element elementHijo = new Element(reco.getDato() + " (G:" +reco.obtenerAlturaNodo() + " H:"+ reco.obtenerAlturaNodo()+")");
 
             elementHijo.setX(String.valueOf(x) + "em");
             elementHijo.setY(String.valueOf(y) + "em");
