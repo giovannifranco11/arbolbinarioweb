@@ -195,9 +195,17 @@ public class ArbolBinarioControlador implements Serializable {
         return (r);
     }
     
+  //NIveles sin orden
     public String imprimirPorNiveles(){
         ArrayList it = this.arbol.impNiveles();
-        return (recorrido(it, "Imprimir por Niveles"));
+        return (recorrido(it, "Imprimir por Niveles sin orden"));
+    }
+    
+    //Niveles con orden
+    public String porNivel(){
+        this.arbol.alturaArbol();
+        ArrayList it = this.arbol.imprimirNivel();
+        return (recorrido(it, "Imprimir por niveles en erden"));
     }
     
     
@@ -330,5 +338,8 @@ public class ArbolBinarioControlador implements Serializable {
             pintarArbolTerminados(reco.getDerecha(), model, elementHijo, x + 5, y + 5);
         }
     }
+    
+    
+    
 
 }
