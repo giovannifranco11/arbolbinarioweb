@@ -32,6 +32,10 @@ import org.primefaces.model.diagram.endpoint.EndPointAnchor;
 public class ArbolBinarioControlador implements Serializable {
     
     Arbol miArbol = new Arbol();
+    
+    public ArbolBinarioControlador(){
+        
+    }
 
     private DefaultDiagramModel model;
     private DefaultDiagramModel modelArbol2;
@@ -125,9 +129,7 @@ public class ArbolBinarioControlador implements Serializable {
     /**
      * Creates a new instance of ArbolBinarioControlador
      */
-    public ArbolBinarioControlador() {
-
-    }
+   
 
     public void adicionarNodo() {
         try {
@@ -168,11 +170,36 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
-   /* public String imprimirPorNiveles(){
-        ArrayList it = this.miArbol.impNiveles();
+    /*public String imprimirPorNiveles(){
+        ArrayList it = this.miArbol.impNivel();
         return (recorrido(it, "Imprimir por niveles"));
     }
     */
+    
+    public String borrar(Integer dato){
+        Integer x = this.arbol.borrar(dato);
+        if(x == null){
+            return ("No existe el dato en el arbol");
+        }
+        return ("Borrado el dato: " + x.toString());
+    }
+    
+    
+    public String recorrido(ArrayList it, String msg){
+        int i =0;
+        String r = msg + "\n";
+        while(i < it.size()){
+            r += "\t" + it.get(i).toString() + "\n";
+            i++;
+        }
+        return (r);
+    }
+    
+    public String imprimirPorNiveles(){
+        ArrayList it = this.arbol.impNiveles();
+        return (recorrido(it, "Imprimir por Niveles"));
+    }
+    
     
     public DefaultDiagramModel getModel() {
         return model;

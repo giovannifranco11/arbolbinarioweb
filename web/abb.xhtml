@@ -38,7 +38,7 @@
                 <p:commandButton value="InOrden" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>                
                 <p:commandButton value="PreOrden" action="#{arbolBinarioControlador.habilitarPreOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="PostOrden" action="#{arbolBinarioControlador.habilitarPostOrden()}" update="@all" ajax="false"/>
-                <p:commandButton value="PorNiveles" action="#{arbolBinarioControlador.impNIveles()}" update="@all" ajax="false"/>
+                <p:commandButton value="PorNiveles" action="#{arbolBinarioControlador.imprimirPorNiveles()}" update="@all" ajax="false"/>
                 <p:commandButton value="NivelOrdenado" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="Hojas" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="Buscar" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
@@ -112,7 +112,17 @@
         </h:panelGroup>
                             
              
- 
+        
+            <p:panel header="Imprimir por Niveles">
+                <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.impNiveles()}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{nodo}" />
+                    </p:column>
+                </p:dataTable>                
+            </p:panel>  
+        
+
+        
         <p:diagram id="pnlArbolTerminados" value="#{arbolBinarioControlador.modelArbol2}" style="height:400px" styleClass="ui-widget-content" />
         
     </ui:define>
