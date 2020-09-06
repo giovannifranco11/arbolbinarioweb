@@ -40,8 +40,7 @@
                 <p:commandButton value="PostOrden" action="#{arbolBinarioControlador.habilitarPostOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="PorNiveles" action="#{arbolBinarioControlador.imprimirPorNiveles()}" update="@all" ajax="false"/>
                 <p:commandButton value="NivelOrdenado" action="#{arbolBinarioControlador.imprimirPorNiveles()}" update="@all" ajax="false"/>
-                <p:commandButton value="Hojas" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
-                <p:commandButton value="Buscar" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
+                <p:commandButton value="Hojas" action="#{arbolBinarioControlador.darHojas()}" update="@all" ajax="false"/>
                 <p:commandButton value="BuscarPadre" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="Borrar" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="Podar" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
@@ -120,6 +119,13 @@
                 </p:dataTable>                
             </p:panel>  
         
+            <p:panel header="Hojas del Arbol">
+                <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.hojas}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{nodo}" />
+                    </p:column>
+                </p:dataTable>                
+            </p:panel>
         
             <p:panel header="Imprimir Niveles Ordenado">
                 <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.imprimirNivel()}">
@@ -128,6 +134,9 @@
                     </p:column>
                 </p:dataTable>                
             </p:panel>
+                 
+        
+            
         
         
 

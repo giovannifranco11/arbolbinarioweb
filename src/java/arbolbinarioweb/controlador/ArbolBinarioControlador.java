@@ -121,7 +121,8 @@ public class ArbolBinarioControlador implements Serializable {
     public ArbolBinario getArbol() {
         return arbol;
     }
-
+    
+    
     public void setArbol(ArbolBinario arbol) {
         this.arbol = arbol;
     }
@@ -205,7 +206,13 @@ public class ArbolBinarioControlador implements Serializable {
     public String porNivel(){
         this.arbol.alturaArbol();
         ArrayList it = this.arbol.imprimirNivel();
-        return (recorrido(it, "Imprimir por niveles en erden"));
+        return (recorrido(it, "Los Nodos en orden son: "));
+    }
+    
+    // Hojas
+    public String darHojas(){
+        ArrayList it = this.arbol.getHojas();
+        return (recorrido(it, "Las hojas del Arbol son: "));
     }
     
     
