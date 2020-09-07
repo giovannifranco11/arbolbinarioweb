@@ -190,7 +190,7 @@ public class ArbolBinarioControlador implements Serializable {
     */
     
     public String borrar(Integer dato){
-        Integer x = this.arbol.borrar(dato);
+        Integer x = this.arbol.borrarNodo(dato);
         if(x == null){
             return ("No existe el dato en el arbol");
         }
