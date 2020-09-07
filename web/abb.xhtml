@@ -51,7 +51,7 @@
                 <p:commandButton value="CambiarValores" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="Rama(s)Mayor" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="CantidadNodos" action="#{arbolBinarioControlador.arbol.cantidadNodos()}" update="@all" ajax="false"/>
-                <p:commandButton value="CantidadHojas" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
+                <p:commandButton value="CantidadHojas" action="#{arbolBinarioControlador.arbol.cantidadNodosHoja()}" update="@all" ajax="false"/>
                 <p:commandButton value="MayorValor" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="MenorValor" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 
@@ -151,6 +151,14 @@
                
             <p:panel header="Cantidad de Nodos del Arbol">
                 <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.cantidadNodos()}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{nodo}" />
+                    </p:column>
+                </p:dataTable>                
+            </p:panel>
+        
+            <p:panel header="Cantidad de Hojas del Arbol">
+                <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.cantidadNodosHoja()}">
                     <p:column headerText="Número">
                         <h:outputText value="#{nodo}" />
                     </p:column>
