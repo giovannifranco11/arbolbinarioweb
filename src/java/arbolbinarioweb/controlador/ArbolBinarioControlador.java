@@ -373,6 +373,8 @@ public class ArbolBinarioControlador implements Serializable {
     }
     
     
-    
+    public void podarArbol(){
+        this.arbol.podar();
+    }
 
 }
