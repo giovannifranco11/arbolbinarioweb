@@ -50,7 +50,7 @@
                 <p:commandButton value="BorrarMenor" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="CambiarValores" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="Rama(s)Mayor" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
-                <p:commandButton value="CantidadNodos" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
+                <p:commandButton value="CantidadNodos" action="#{arbolBinarioControlador.arbol.cantidadNodos()}" update="@all" ajax="false"/>
                 <p:commandButton value="CantidadHojas" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="MayorValor" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="MenorValor" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
@@ -149,6 +149,13 @@
                 </p:dataTable>                
             </p:panel>                           
                
+            <p:panel header="Cantidad de Nodos del Arbol">
+                <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.cantidadNodos()}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{nodo}" />
+                    </p:column>
+                </p:dataTable>                
+            </p:panel>
 
         
         <p:diagram id="pnlArbolTerminados" value="#{arbolBinarioControlador.modelArbol2}" style="height:400px" styleClass="ui-widget-content" />

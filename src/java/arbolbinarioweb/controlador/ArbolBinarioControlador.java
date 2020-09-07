@@ -208,6 +208,14 @@ public class ArbolBinarioControlador implements Serializable {
         return (r);
     }
     
+    public String CantidadNodos(){
+        return this.arbol.cantidadNodos();
+    }
+    
+    public String CantidadNodosHoja(){
+        return this.arbol.cantidadNodosHoja();
+    }
+    
   //Niveles sin orden
     public String imprimirPorNiveles(){
         ArrayList it = this.arbol.impNiveles();
