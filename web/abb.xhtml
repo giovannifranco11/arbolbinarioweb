@@ -41,6 +41,7 @@
                 <p:commandButton value="PorNiveles" action="#{arbolBinarioControlador.imprimirPorNiveles()}" update="@all" ajax="false"/>
                 <p:commandButton value="NivelOrdenado" action="#{arbolBinarioControlador.imprimirPorNiveles()}" update="@all" ajax="false"/>
                 <p:commandButton value="Hojas" action="#{arbolBinarioControlador.darHojas()}" update="@all" ajax="false"/>
+                <p:commandButton value="Buscar" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="BuscarPadre" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="Borrar" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="Podar" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
@@ -55,20 +56,27 @@
                 <p:commandButton value="MenorValor" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
                 
 
-
-
-            </p:panel>
+            </p:panel>            
         </h:form>
+        
+        
         <h:form>
             <p:panel header="Llenar árbol">
                 <p:inputTextarea required="true" cols="40" value="#{arbolBinarioControlador.datoscsv}"/>
                 <p:commandButton value="LLenar Arbol" action="#{arbolBinarioControlador.extraerDatos()}"
                                  update="@all" ajax="false"/>
-
+            </p:panel>            
+        </h:form>
+        
+        <h:form>
+            <p:panel header="Buscar Nodo">
+                <p:inputText required="true" style="width:400px" value="#{arbolBinarioControlador.esta(2)}"/>
+                <p:commandButton value="Buscar" action="#{arbolBinarioControlador.arbol.buscar(x)}"
+                                 update="@all" ajax="false"/>              
             </p:panel>
         </h:form>
+        
         <h:form>
-
             <p:panel header="Terminados en">
                 <p:inputText required="true" value="#{arbolBinarioControlador.terminado}"/>
                 <p:commandButton value="Buscar Terminados" action="#{arbolBinarioControlador.buscarTerminadosEn()}"
@@ -76,7 +84,6 @@
                 <p:commandButton value="Obtener árbol terminados" 
                                  action="#{arbolBinarioControlador.encontrarTerminadosEn()}"
                                  update="@all" ajax="false"/>
-
             </p:panel>
         </h:form>
         
@@ -119,26 +126,29 @@
                 </p:dataTable>                
             </p:panel>  
         
-            <p:panel header="Hojas del Arbol">
-                <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.hojas}">
-                    <p:column headerText="Número">
-                        <h:outputText value="#{nodo}" />
-                    </p:column>
-                </p:dataTable>                
-            </p:panel>
-        
+         <!--Método con problemas, deberia quedar la linea asi:
+        <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.imprimirNivel()}">
+         Pero esta asi: <p:dataTable var="nodo" value="#{arbolBinarioControlador.porNivel()}">  -->
+         
             <p:panel header="Imprimir Niveles Ordenado">
-                <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.imprimirNivel()}">
+                <p:dataTable var="nodo" value="#{arbolBinarioControlador.porNivel()}">
                     <p:column headerText="Número">
                         <h:outputText value="#{nodo}" />
                     </p:column>
                 </p:dataTable>                
             </p:panel>
                  
+        <!--Método con problemas deberia quedar la linea asi:
+        <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.hojas}">        -->
         
-            
-        
-        
+            <p:panel header="Hojas del Arbol">
+                <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.hojas}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{nodo}" />
+                    </p:column>
+                </p:dataTable>                
+            </p:panel>                           
+               
 
         
         <p:diagram id="pnlArbolTerminados" value="#{arbolBinarioControlador.modelArbol2}" style="height:400px" styleClass="ui-widget-content" />

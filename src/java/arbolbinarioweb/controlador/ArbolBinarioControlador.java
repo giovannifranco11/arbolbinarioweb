@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.primefaces.model.diagram.Connection;
 import org.primefaces.model.diagram.DefaultDiagramModel;
 import org.primefaces.model.diagram.Element;
@@ -47,6 +48,7 @@ public class ArbolBinarioControlador implements Serializable {
     private boolean verPostOrden = false;
 
     private String datoscsv = "18,15,13,17,8,14,-8,10,59,28,80,78,90";
+ // private int numero = Integer.parseInt(JOptionPane.showInputDialog("Digite un numero"));
     private int terminado;
     private ArbolBinario arbolTerminados = new ArbolBinario();
 
@@ -81,6 +83,16 @@ public class ArbolBinarioControlador implements Serializable {
     public void setDatoscsv(String datoscsv) {
         this.datoscsv = datoscsv;
     }
+    
+    /*
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+    */
     
 // InOrden
     public boolean isVerInOrden() {
@@ -196,7 +208,7 @@ public class ArbolBinarioControlador implements Serializable {
         return (r);
     }
     
-  //NIveles sin orden
+  //Niveles sin orden
     public String imprimirPorNiveles(){
         ArrayList it = this.arbol.impNiveles();
         return (recorrido(it, "Imprimir por Niveles sin orden"));
@@ -213,6 +225,13 @@ public class ArbolBinarioControlador implements Serializable {
     public String darHojas(){
         ArrayList it = this.arbol.getHojas();
         return (recorrido(it, "Las hojas del Arbol son: "));
+    }
+    
+    public String esta(Integer dato){
+        boolean siEsta = this.arbol.buscar(dato);
+        String r = "El Nodo : " + dato.toString() + "\n";
+        r += siEsta ? " Si se encuentra en el arbol" : " No se encuentra en el arbol";
+        return (r);
     }
     
     
@@ -259,7 +278,14 @@ public class ArbolBinarioControlador implements Serializable {
             pintarArbol(reco.getDerecha(), model, elementHijo, x + 5, y + 5);
         }
     }
-
+    
+    /*
+    public void buscarNodo(){
+        int dato_a_buscar = Integer.parseInt(JOptionPane.showInputDialog("Ingrese Numero"));
+        String salida = this.esta(dato_a_buscar);
+        }
+    */
+    
     public void extraerDatos() {
         try {
             arbol.setRaiz(null);
