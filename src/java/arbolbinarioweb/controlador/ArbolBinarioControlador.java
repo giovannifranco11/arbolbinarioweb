@@ -139,6 +139,22 @@ public class ArbolBinarioControlador implements Serializable {
         this.arbol = arbol;
     }
 
+    public String CantidadNodos(){
+        return this.arbol.cantidadNodos();
+    }
+    
+    public String CantidadNodosHoja(){
+        return this.arbol.cantidadNodosHoja();
+    }
+    
+    /**
+    public void valorMenor(){
+        this.arbol.valorMenor();
+    }
+    */
+   
+    
+    
     /**
      * Creates a new instance of ArbolBinarioControlador
      */
@@ -183,12 +199,7 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
-    /*public String imprimirPorNiveles(){
-        ArrayList it = this.miArbol.impNivel();
-        return (recorrido(it, "Imprimir por niveles"));
-    }
-    */
-    
+        
     public String borrar(Integer dato){
         Integer x = this.arbol.borrarNodo(dato);
         if(x == null){
@@ -208,14 +219,7 @@ public class ArbolBinarioControlador implements Serializable {
         return (r);
     }
     
-    public String CantidadNodos(){
-        return this.arbol.cantidadNodos();
-    }
-    
-    public String CantidadNodosHoja(){
-        return this.arbol.cantidadNodosHoja();
-    }
-    
+        
   //Niveles sin orden
     public String imprimirPorNiveles(){
         ArrayList it = this.arbol.impNiveles();

@@ -164,7 +164,25 @@
                     </p:column>
                 </p:dataTable>                
             </p:panel>
-
+        
+        
+        
+            <p:panel header="Valor menor">
+                <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.cantidadNodos()}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{nodo}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        
+            <p:panel header="Valor mayor">
+                <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.cantidadNodosHoja()}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{nodo}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        
         
         <p:diagram id="pnlArbolTerminados" value="#{arbolBinarioControlador.modelArbol2}" style="height:400px" styleClass="ui-widget-content" />
         
